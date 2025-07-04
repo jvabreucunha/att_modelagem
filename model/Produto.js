@@ -12,7 +12,7 @@ const Produto = db.define('produto', {
         allowNull: false
     },
     description: {
-        type: DataTypes.DECIMAL(10,2),
+        type: DataTypes.STRING(30),
         allowNull: false
     },
     category: {
