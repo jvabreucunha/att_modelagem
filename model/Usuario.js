@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 const db = require('../db/conn')
 
-const Usuario = db.define('usuario', {
+const Usuario = db.define('Usuario', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -20,7 +20,7 @@ const Usuario = db.define('usuario', {
         allowNull: false
     },
     email: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(100),
         allowNull: false
     },
     phone: {

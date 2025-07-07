@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 const db = require('../db/conn')
 
-const Compra = db.define('compra', {
+const Compra = db.define('Compra', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -10,7 +10,7 @@ const Compra = db.define('compra', {
     id_usuario: {
         type: DataTypes.INTEGER,
         references: {
-            model: 'usuario',  
+            model: 'usuarios',  
             key: 'id'
         }
     },

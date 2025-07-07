@@ -1,13 +1,13 @@
 const conn = require('./db/conn')
-const { Fabricante, Produto, Entrega } = require('./model/rel')
+const { Compra, Produto, Usuario } = require('./model/rel')
 
 async function syncDataBase() {
-    try{
+    try {
         await conn.sync({force: true})
         console.log('Tabelas criadas e Banco de dados sincronizado!')
-    }catch(err){
-        console.error('Não foi possível criar as tabelas e sincronizar o BD!',err)
-    }finally{
+    } catch (err) {
+        console.error('Erro ao sincronuzar tabelas', err)
+    } finally {
         await conn.close()
         console.log('Banco de dados fechado!')
     }

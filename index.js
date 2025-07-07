@@ -1,8 +1,9 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+require('dotenv').config() 
 
-const PORT = 3000
+const PORT = process.env.PORT
 const hostname = 'localhost'
 
 const entregaController = require('./controller/entrega.controller')
