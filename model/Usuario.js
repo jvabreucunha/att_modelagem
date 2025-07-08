@@ -2,48 +2,48 @@ const { DataTypes } = require('sequelize')
 const db = require('../db/conn')
 
 const Usuario = db.define('Usuario', {
-    id: {
+    idUsuario: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
     },
-    firstName: {
-        type: DataTypes.STRING(30),
-        allowNull: false
+    primeiroNome: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
     },
-    lastName: {
-        type: DataTypes.STRING(30),
-        allowNull: false
+    sobrenome: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
     },
-    age: {
+    idade: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
     },
     email: {
-        type: DataTypes.STRING(100),
-        allowNull: false
+        type: DataTypes.STRING(255),
+        allowNull: false,
     },
-    phone: {
+    telefone: {
         type: DataTypes.STRING(30),
-        allowNull: false
+        allowNull: false,
     },
-    address: {
-        type: DataTypes.STRING(30),
-        allowNull: false
+    endereco: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
     },
-    city: {
-        type: DataTypes.STRING(30),
-        allowNull: false
+    cidade: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
     },
-    state: {
-        type: DataTypes.STRING(30),
-        allowNull: false
+    estado: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
     },
-    birthDate: {
+    dataNascimento: {
         type: DataTypes.DATE,
-        allowNull: false
-    },
-},{
+        allowNull: false,
+    }
+}, {
     tableName: 'usuarios',
     timestamps: false
 })

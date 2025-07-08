@@ -6,8 +6,8 @@ require('dotenv').config()
 const PORT = process.env.PORT
 const hostname = 'localhost'
 
-const entregaController = require('./controller/entrega.controller')
-const fabricanteController = require('./controller/fabricante.controller')
+const entregaController = require('./controller/usuario.controller')
+const fabricanteController = require('./controller/compra.controller')
 const produtoController = require('./controller/produto.controller')
 const conn = require('./db/conn')
 

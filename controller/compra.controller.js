@@ -27,7 +27,7 @@ const apagar = async (req,res)=>{
     try{
         const dados = await Fabricante.findByPk(valor)
         if(dados){
-            await Fabricante.destroy({where: { codFabricante: valor}})
+            dados.destroy()
             res.status(204).json({message: 'Dados excluídos com sucesso!'})
         }else{
             res.status(404).json({message: 'Fabricante não encontrado!'})
