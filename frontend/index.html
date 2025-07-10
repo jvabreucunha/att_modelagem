@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sistema de Compras</title>
+  <link rel="stylesheet" href="./css/main.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Sistema de Compras</h1>
+    <nav>
+      <button data-section="usuarios">Usuários</button>
+      <button data-section="produtos">Produtos</button>
+      <button data-section="compras">Compras</button>
+      <button data-section="relatorios">Relatórios</button>
+      <button data-section="graficos">Gráficos</button>
+      <button data-section="lote">Cadastrar Lote</button>
+    </nav>
+  </header>
+  <main>
+    <section id="usuarios" class="hidden">
+        <h2>Usuários</h2>
+        <div class="form-crud">
+          <input id="usuarioNome" placeholder="Primeiro nome" required />
+          <input id="usuarioSobrenome" placeholder="Sobrenome" required />
+          <input id="usuarioIdade" type="number" placeholder="Idade" min="0" required />
+          <input id="usuarioEmail" type="email" placeholder="Email" required />
+          <input id="usuarioTelefone" placeholder="Telefone" required />
+          <input id="usuarioEndereco" placeholder="Endereço" required />
+          <input id="usuarioCidade" placeholder="Cidade" required />
+          <input id="usuarioEstado" placeholder="Estado" required />
+          <input id="usuarioDataNascimento" type="date" placeholder="Data de nascimento" required />
+          <button id="btnAddUsuario">Adicionar</button>
+        </div>
+        <table id="tableUsuarios">
+          <thead>
+            <tr>
+              <th>ID</th><th>Nome</th><th>Email</th><th>Ações</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+    </section>
+    <section id="produtos" class="hidden">
+      <h2>Produtos</h2>
+      <div class="form-crud">
+        <input id="prodTitulo" placeholder="Título" />
+        <input id="prodCategoria" placeholder="Categoria" />
+        <input id="prodPreco" type="number" placeholder="Preço" />
+        <input id="prodEstoque" type="number" placeholder="Estoque" />
+        <button id="btnAddProduto">Adicionar</button>
+      </div>
+      <table id="tableProdutos">
+        <thead><tr><th>ID</th><th>Título</th><th>Categoria</th><th>Preço</th><th>Estoque</th><th>Ações</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="compras" class="hidden">
+      <h2>Compras</h2>
+      <!-- Formulário CRUD para compras -->
+    </section>
+
+    <section id="relatorios" class="hidden">
+      <h2>Relatórios Gerenciais</h2>
+      <div class="tabs">
+        <button data-report="usuarios">Usuários</button>
+        <button data-report="produtos">Produtos</button>
+        <button data-report="compras">Compras</button>
+        <button data-report="estoque">Estoque Crítico</button>
+        <button data-report="consolidado">Consolidado</button>
+      </div>
+      <div id="reportContent"></div>
+    </section>
+
+    <section id="graficos" class="hidden">
+      <h2>Gráficos</h2>
+      <div class="charts-filters">
+        <label>ID inicial: <input type="number" id="filterStart" value="1" /></label>
+        <label>ID final: <input type="number" id="filterEnd" value="10" /></label>
+        <button id="btnUpdateCharts">Atualizar gráficos</button>
+      </div>
+      <canvas id="chartProdutos"></canvas>
+      <canvas id="chartUsuarios"></canvas>
+    </section>
+    
+    <section id="lote" class="hidden">
+        <h2>Povoamento em Lote</h2>
+        <button id="btnSeed">Executar Povoamento</button>
+        <pre id="seedLogs" class="logs"></pre>
+    </section>      
+  </main>
+  <script src="./js/main.js"></script>
+  <script src="./js/seed.js"></script>
+</body>
+</html>

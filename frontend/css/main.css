@@ -1,0 +1,6 @@
+/* main.css */
+/* unir todos os css em um uníco css*/
+
+@import "base.css";
+@import "lote.css";
+
