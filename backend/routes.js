@@ -11,6 +11,7 @@ const compraController   = require('./controller/compra.controller');
 router.post('/usuarios', usuarioController.cadastrarUsuario);
 router.get('/usuarios', usuarioController.listarUsuarios);
 router.get('/usuarios/:id', usuarioController.buscarUsuarioPorId);
+router.get('/usuarios/buscar', usuarioController.buscarUsuarioPorNome);
 router.put('/usuarios/:id', usuarioController.atualizarUsuario);
 router.delete('/usuarios/:id', usuarioController.apagarUsuario);
 
@@ -18,6 +19,7 @@ router.delete('/usuarios/:id', usuarioController.apagarUsuario);
 router.post('/produtos', produtoController.cadastrarProduto);
 router.get('/produtos', produtoController.listarProdutos);
 router.get('/produtos/:id', produtoController.buscarProdutoPorId);
+router.get('/produtos/buscar', produtoController.buscarProdutoPorNome);
 router.put('/produtos/:id', produtoController.atualizarProduto);
 router.delete('/produtos/:id', produtoController.apagarProduto);
 

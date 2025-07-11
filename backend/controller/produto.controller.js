@@ -1,4 +1,4 @@
-// controllers/produto.controller.js
+const { Op } = require('sequelize');
 const Produto = require('../model/Produto');
 
 // CREATE
@@ -38,6 +38,33 @@ const buscarProdutoPorId = async (req, res) => {
   }
 };
 
+const buscarProdutoPorNome = async (req, res) => {
+  const { nome } = req.query;
+
+  try {
+    if (!nome) {
+      return res.status(400).json({ message: 'Informe um nome para busca.' });
+    }
+
+    const produtos = await Produto.findAll({
+      where: {
+        titulo: {
+          [Op.like]: `%${nome}%`
+        }
+      }
+    });
+
+    if (produtos.length === 0) {
+      return res.status(404).json({ message: 'Nenhum produto encontrado com esse nome.' });
+    }
+
+    return res.status(200).json(produtos);
+  } catch (err) {
+    console.error('Erro ao buscar produto por nome:', err);
+    return res.status(500).json({ message: 'Erro ao buscar produto por nome.' });
+  }
+};
+
 // UPDATE
 const atualizarProduto = async (req, res) => {
   const { id } = req.params;
@@ -73,6 +100,7 @@ module.exports = {
   cadastrarProduto,
   listarProdutos,
   buscarProdutoPorId,
+  buscarProdutoPorNome,
   atualizarProduto,
   apagarProduto
 };

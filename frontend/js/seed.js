@@ -57,7 +57,7 @@ async function popularProdutos() {
 
 async function popularCompras() {
   // Busca todos os usuários e produtos já criados
-  const [usR, prR] = await Promise.all([
+  const [usR, prR] = await Promise.all([  
     fetch(`${API}/usuarios`),
     fetch(`${API}/produtos`)
   ]);

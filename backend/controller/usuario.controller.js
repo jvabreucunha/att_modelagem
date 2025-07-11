@@ -1,4 +1,4 @@
-// controllers/usuario.controller.js
+const { Op } = require('sequelize');
 const Usuario = require('../model/Usuario');
 
 // CREATE
@@ -38,6 +38,33 @@ const buscarUsuarioPorId = async (req, res) => {
   }
 };
 
+const buscarUsuarioPorNome = async (req, res) => {
+  const { nome } = req.query;
+
+  try {
+    if (!nome) {
+      return res.status(400).json({ message: 'Informe um nome para busca.' });
+    }
+
+    const usuarios = await Usuario.findAll({
+      where: {
+        primeiroNome: {
+          [Op.like]: `%${nome}%`
+        }
+      }
+    });
+
+    if (usuarios.length === 0) {
+      return res.status(404).json({ message: 'Nenhum usuário encontrado com esse nome.' });
+    }
+
+    return res.status(200).json(usuarios);
+  } catch (err) {
+    console.error('Erro ao buscar usuário por nome:', err);
+    return res.status(500).json({ message: 'Erro ao buscar usuário por nome.' });
+  }
+};
+
 // UPDATE
 const atualizarUsuario = async (req, res) => {
   const { id } = req.params;
@@ -73,6 +100,7 @@ module.exports = {
   cadastrarUsuario,
   listarUsuarios,
   buscarUsuarioPorId,
+  buscarUsuarioPorNome,
   atualizarUsuario,
   apagarUsuario
 };

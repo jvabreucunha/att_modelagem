@@ -20,29 +20,62 @@
     </nav>
   </header>
   <main>
-    <section id="usuarios" class="hidden">
-        <h2>Usuários</h2>
-        <div class="form-crud">
-          <input id="usuarioNome" placeholder="Primeiro nome" required />
-          <input id="usuarioSobrenome" placeholder="Sobrenome" required />
-          <input id="usuarioIdade" type="number" placeholder="Idade" min="0" required />
-          <input id="usuarioEmail" type="email" placeholder="Email" required />
-          <input id="usuarioTelefone" placeholder="Telefone" required />
-          <input id="usuarioEndereco" placeholder="Endereço" required />
-          <input id="usuarioCidade" placeholder="Cidade" required />
-          <input id="usuarioEstado" placeholder="Estado" required />
-          <input id="usuarioDataNascimento" type="date" placeholder="Data de nascimento" required />
-          <button id="btnAddUsuario">Adicionar</button>
+    <section id="usuarios" class="hidden usuario-section">
+      <div class="usuario-header">
+        <h2>Buscar Usuários</h2>
+        <button id="btnCadastrarUsuario" class="btn-cadastrar">Cadastrar Novo Usuário</button>
+      </div>
+    
+      <div class="form-busca">
+        <label for="metodoBusca">Método de Busca:</label>
+        <select id="metodoBusca">
+          <option value="id">Por ID</option>
+          <option value="nome">Por Nome</option>
+        </select>
+    
+        <input id="inputBuscaUsuario" placeholder="Digite o valor da busca" />
+        <button id="btnBuscarUsuario" class="btn-buscar">Buscar</button>
+      </div>
+    
+      <table id="tableUsuarios" class="table-usuario">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Primeiro Nome</th>
+            <th>Sobrenome</th>
+            <th>Idade</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Endereço</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Data Nasc.</th>
+            <th>Ações</th>      
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <!-- Modal de Cadastro -->
+      <div id="modalCadastro" class="modal hidden">
+        <div class="modal-content">
+          <span id="modalClose" class="modal-close">&times;</span>
+          <h3>Cadastrar Novo Usuário</h3>
+          <form id="formCadastroUsuario">
+            <div class="form-group"><label>Primeiro Nome<input name="primeiroNome" required /></label></div>
+            <div class="form-group"><label>Sobrenome<input name="sobrenome" required /></label></div>
+            <div class="form-group"><label>Idade<input name="idade" type="number" min="0" max="120" required /></label></div>
+            <div class="form-group"><label>Email<input name="email" type="email" required /></label></div>
+            <div class="form-group"><label>Telefone<input name="telefone" required /></label></div>
+            <div class="form-group"><label>Endereço<input name="endereco" required /></label></div>
+            <div class="form-group"><label>Cidade<input name="cidade" required /></label></div>
+            <div class="form-group"><label>Estado<input name="estado" required /></label></div>
+            <div class="form-group"><label>Data Nasc.<input name="dataNascimento" type="date" required /></label></div>
+            <div id="formError" class="form-error hidden"></div>
+            <button type="submit" class="btn-submit">Salvar</button>
+          </form>
         </div>
-        <table id="tableUsuarios">
-          <thead>
-            <tr>
-              <th>ID</th><th>Nome</th><th>Email</th><th>Ações</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-    </section>
+      </div>
+    </section>     
     <section id="produtos" class="hidden">
       <h2>Produtos</h2>
       <div class="form-crud">
@@ -92,7 +125,7 @@
         <pre id="seedLogs" class="logs"></pre>
     </section>      
   </main>
-  <script src="./js/main.js"></script>
-  <script src="./js/seed.js"></script>
+  <script type="module" src="./js/main.js"></script>
+  <script type="module" src="./js/seed.js"></script>
 </body>
 </html>

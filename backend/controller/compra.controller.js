@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const Compra = require('../model/Compra');
 const Produto = require('../model/Produto');
 
