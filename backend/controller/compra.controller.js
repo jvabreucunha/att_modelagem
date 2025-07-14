@@ -90,7 +90,7 @@ const apagarCompra = async (req, res) => {
   try {
     const compra = await Compra.findByPk(id);
     if (!compra) return res.status(404).json({ message: 'Compra não encontrada.' });
-
+    
     await compra.destroy();
     res.status(204).send();
   } catch (err) {

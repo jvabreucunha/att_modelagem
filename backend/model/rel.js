@@ -5,13 +5,13 @@ const Usuario = require('./Usuario')
 Usuario.hasMany(Compra, {
     foreignKey: 'idUsuario',
     as: 'usuarioCom',
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
 })
 
 Compra.hasMany(Produto, {
     foreignKey: 'idProduto',
     as: 'compraProd',
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
 })
 
 Compra.belongsTo(Usuario, {
