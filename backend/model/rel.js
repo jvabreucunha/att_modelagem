@@ -6,24 +6,29 @@ Usuario.hasMany(Compra, {
     foreignKey: 'idUsuario',
     as: 'usuarioCom',
     onDelete: 'CASCADE',
-})
-
-Compra.hasMany(Produto, {
-    foreignKey: 'idProduto',
-    as: 'compraProd',
-    onDelete: 'CASCADE',
-})
-
+    onUpdate: 'CASCADE',
+});
 Compra.belongsTo(Usuario, {
     foreignKey: 'idUsuario',
     as: 'compraUser',
-    allowNull: false
-})
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
 
-Produto.belongsTo(Compra, {
+Produto.hasMany(Compra, {
     foreignKey: 'idProduto',
-    as: 'produtoCom',
-    allowNull: false
-})
+    as: 'produtoEmCompras',
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
+});
 
-module.exports = { Usuario, Compra, Produto}
+Compra.belongsTo(Produto, {
+    foreignKey: 'idProduto',
+    as: 'compraProd',
+    allowNull: true,
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
+});
+
+module.exports = { Usuario, Compra, Produto }

@@ -17,7 +17,7 @@ const Compra = db.define('Compra', {
     },
     idProduto: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'produtos',  
             key: 'idProduto'

@@ -6,6 +6,7 @@ const Produto = db.define('Produto', {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+        allowNull: true
     },
     titulo: {
         type: DataTypes.STRING(255),

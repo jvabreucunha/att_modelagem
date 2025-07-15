@@ -4,7 +4,18 @@ const Produto = require('../model/Produto');
 // CREATE
 const cadastrarProduto = async (req, res) => {
   try {
-    const novoProduto = await Produto.create(req.body);
+    const novoProduto = await Produto.create(req.body, {
+      fields: [
+        'titulo',
+        'descricao',
+        'categoria',
+        'preco',
+        'percentualDesconto',
+        'estoque',
+        'marca'
+      ]
+    });
+    
     return res.status(201).json(novoProduto);
   } catch (err) {
     console.error('Erro ao cadastrar produto:', err);
