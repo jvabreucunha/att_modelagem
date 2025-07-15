@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sistema de Compras</title>
-  <link rel="stylesheet" href="./css/main.css"/>
+  <link rel="stylesheet" href="./css/main.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
   <header>
     <h1>Sistema de Compras</h1>
@@ -25,18 +27,18 @@
         <h2>Buscar Usuários</h2>
         <button id="btnCadastrarUsuario" class="btn-cadastrar">Cadastrar Novo Usuário</button>
       </div>
-    
+
       <div class="form-busca">
         <label for="metodoBusca">Método de Busca:</label>
         <select id="metodoBusca">
           <option value="id">Por ID</option>
           <option value="nome">Por Nome</option>
         </select>
-    
+
         <input id="inputBuscaUsuario" placeholder="Digite o valor da busca" />
         <button id="btnBuscarUsuario" class="btn-buscar">Buscar</button>
       </div>
-    
+
       <table id="tableUsuarios" class="table-usuario">
         <thead>
           <tr>
@@ -50,7 +52,7 @@
             <th>Cidade</th>
             <th>Estado</th>
             <th>Data Nasc.</th>
-            <th>Ações</th>      
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -64,7 +66,8 @@
             <input type="hidden" name="idUsuario" />
             <div class="form-group"><label>Primeiro Nome<input name="primeiroNome" required /></label></div>
             <div class="form-group"><label>Sobrenome<input name="sobrenome" required /></label></div>
-            <div class="form-group"><label>Idade<input name="idade" type="number" min="0" max="120" required /></label></div>
+            <div class="form-group"><label>Idade<input name="idade" type="number" min="0" max="120" required /></label>
+            </div>
             <div class="form-group"><label>Email<input name="email" type="email" required /></label></div>
             <div class="form-group"><label>Telefone<input name="telefone" required /></label></div>
             <div class="form-group"><label>Endereço<input name="endereco" required /></label></div>
@@ -76,20 +79,91 @@
           </form>
         </div>
       </div>
-    </section>     
-    <section id="produtos" class="hidden">
-      <h2>Produtos</h2>
-      <div class="form-crud">
-        <input id="prodTitulo" placeholder="Título" />
-        <input id="prodCategoria" placeholder="Categoria" />
-        <input id="prodPreco" type="number" placeholder="Preço" />
-        <input id="prodEstoque" type="number" placeholder="Estoque" />
-        <button id="btnAddProduto">Adicionar</button>
+    </section>
+    <section id="produtos" class="hidden produto-section">
+      <div class="produto-header">
+        <h2>Gerenciar Produtos</h2>
+        <button id="btnCadastrarProduto" class="btn-cadastrar-produto">Cadastrar Novo Produto</button>
       </div>
-      <table id="tableProdutos">
-        <thead><tr><th>ID</th><th>Título</th><th>Categoria</th><th>Preço</th><th>Estoque</th><th>Ações</th></tr></thead>
+
+      <div class="form-busca">
+        <label for="metodoBuscaProduto">Buscar Por:</label>
+        <select id="metodoBuscaProduto">
+          <option value="idProduto">Por ID</option>
+          <option value="titulo">Por Título</option>
+          <option value="categoria">Por Categoria</option>
+        </select>
+
+        <input id="inputBuscaProduto" placeholder="Digite o valor da busca" />
+        <button id="btnBuscarProduto" class="btn-buscar">Buscar</button>
+      </div>
+
+      <table id="tableProdutos" class="table-produto">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Preço (R$)</th>
+            <th>% Desconto</th>
+            <th>Estoque</th>
+            <th>Marca</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
         <tbody></tbody>
       </table>
+
+      <!-- Modal de Cadastro/edição de Produto -->
+      <div id="modalCadastroProduto" class="modal hidden">
+        <div class="modal-content">
+          <span id="modalCloseProduto" class="modal-close">&times;</span>
+          <h3>Cadastrar / Editar Produto</h3>
+          <form id="formCadastroProduto">
+            <input type="hidden" name="idProduto" />
+
+            <div class="form-group">
+              <label>Título
+                <input name="titulo" type="text" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Descrição
+                <textarea name="descricao" rows="3" required></textarea>
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Categoria
+                <input name="categoria" type="text" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Preço (R$)
+                <input name="preco" type="number" step="0.01" min="0" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>% Desconto
+                <input name="percentualDesconto" type="number" step="0.01" min="0" max="100" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Estoque
+                <input name="estoque" type="number" min="0" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Marca
+                <input name="marca" type="text" />
+              </label>
+            </div>
+
+            <div id="formErrorProduto" class="form-error hidden"></div>
+            <button type="submit" class="btn-submit">Salvar</button>
+          </form>
+        </div>
+      </div>
     </section>
 
     <section id="compras" class="hidden">
@@ -119,14 +193,15 @@
       <canvas id="chartProdutos"></canvas>
       <canvas id="chartUsuarios"></canvas>
     </section>
-    
+
     <section id="lote" class="hidden">
-        <h2>Povoamento em Lote</h2>
-        <button id="btnSeed">Executar Povoamento</button>
-        <pre id="seedLogs" class="logs"></pre>
-    </section>      
+      <h2>Povoamento em Lote</h2>
+      <button id="btnSeed">Executar Povoamento</button>
+      <pre id="seedLogs" class="logs"></pre>
+    </section>
   </main>
   <script type="module" src="./js/main.js"></script>
-  <script type="module" src="./js/seed.js"></script>
+  <script type="module" src="./js/lote/seed.js"></script>
 </body>
+
 </html>

@@ -47,7 +47,7 @@ function abrirModalParaEditar(id) {
     });
 }
 
-function modalUsuarios() {
+export default function modalUsuarios() {
     btnCadastrar.addEventListener('click', () => {
         formCadastro.reset();
         delete formCadastro.dataset.editId; // importante para criar novo
@@ -119,6 +119,5 @@ function modalUsuarios() {
     });
 }
 
-export default function LigaModais() {
-    modalUsuarios();
-}
+
+

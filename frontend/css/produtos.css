@@ -1,0 +1,204 @@
+/* Container geral da seção */
+.produto-section {
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+/* Cabeçalho com título e botão de cadastro */
+.produto-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.produto-header h2 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.btn-cadastrar-produto {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-cadastrar-produto:hover {
+    background-color: #218838;
+}
+
+/* Formulário de busca */
+.form-busca {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.form-busca label {
+    font-weight: bold;
+    color: #555;
+}
+
+.form-busca select,
+.form-busca input {
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-buscar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-buscar:hover {
+    background-color: #0069d9;
+}
+
+/* Tabela de produtos */
+.table-produto {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Limita a coluna de descrição (3ª coluna) */
+.table-produto th:nth-child(3),
+.table-produto td:nth-child(3) {
+  width: 250px;           /* ou qualquer valor que caiba no seu layout */
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;    /* evita quebra de linha */
+}
+
+
+.table-produto th,
+.table-produto td {
+    padding: 0.75rem 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table-produto th {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.table-produto tr:hover {
+    background-color: #fafafa;
+}
+
+/* Ajuste para o botão de ações dentro da tabela */
+.table-produto td button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+}
+
+.table-produto td button.edit {
+    color: #ffc107;
+}
+
+.table-produto td button.del {
+    color: #dc3545;
+}
+
+/* Modal overlay */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+/* Esconder modal */
+.hidden {
+    display: none;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+/* Botão de fechar */
+.modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Estilo do formulário dentro do modal */
+#formCadastroProduto .form-group {
+    margin-bottom: 0.8rem;
+}
+
+#formCadastroProduto .form-group label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    color: #333;
+}
+
+#formCadastroProduto input,
+#formCadastroProduto textarea {
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 0.2rem;
+}
+
+/* Botão de submit */
+.btn-submit {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-submit:hover {
+    background-color: #218838;
+}
+
+/* Mensagem de erro dentro do modal */
+.form-error {
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 0.75rem;
+    border: 1px solid #f5c2c7;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
