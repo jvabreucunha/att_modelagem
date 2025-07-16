@@ -3,9 +3,9 @@ const { Router } = require('express');
 const router = Router();
 
 // Import dos controllers
-const usuarioController  = require('./controller/usuario.controller');
-const produtoController  = require('./controller/produto.controller');
-const compraController   = require('./controller/compra.controller');
+const usuarioController = require('./controller/usuario.controller');
+const produtoController = require('./controller/produto.controller');
+const compraController = require('./controller/compra.controller');
 
 // Rotas de Usuários
 router.post('/usuarios', usuarioController.cadastrarUsuario);

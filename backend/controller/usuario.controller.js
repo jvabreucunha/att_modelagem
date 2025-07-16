@@ -4,7 +4,19 @@ const Usuario = require('../model/Usuario');
 // CREATE
 const cadastrarUsuario = async (req, res) => {
   try {
-    const novoUsuario = await Usuario.create(req.body);
+    const novoUsuario = await Usuario.create(req.body, {
+      fields: [
+        'primeiroNome',
+        'sobrenome',
+        'idade',
+        'email',
+        'telefone',
+        'endereco',
+        'cidade',
+        'estado',
+        'dataNascimento'
+      ]
+    });
     return res.status(201).json(novoUsuario);
   } catch (err) {
     console.error('Erro ao cadastrar usuário:', err);

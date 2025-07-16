@@ -91,7 +91,6 @@
         <select id="metodoBuscaProduto">
           <option value="idProduto">Por ID</option>
           <option value="titulo">Por Título</option>
-          <option value="categoria">Por Categoria</option>
         </select>
 
         <input id="inputBuscaProduto" placeholder="Digite o valor da busca" />
@@ -166,10 +165,102 @@
       </div>
     </section>
 
-    <section id="compras" class="hidden">
-      <h2>Compras</h2>
-      <!-- Formulário CRUD para compras -->
+    <section id="compras" class="hidden compra-section">
+      <div class="compra-header">
+        <h2>Gerenciar Compras</h2>
+        <button id="btnCadastrarCompra" class="btn-cadastrar-compra">Nova Compra</button>
+      </div>
+
+      <div class="form-busca">
+        <label for="metodoBuscaCompra">Buscar Por:</label>
+        <select id="metodoBuscaCompra">
+          <option value="idCompra">Por ID</option>
+        </select>
+
+        <input id="inputBuscaCompra" placeholder="Digite o valor da busca" />
+        <button id="btnBuscarCompra" class="btn-buscar">Buscar</button>
+      </div>
+
+      <table id="tableCompras" class="table-compra">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Usuário</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Data</th>
+            <th>Preço Unit.</th>
+            <th>Desconto</th>
+            <th>Preço Final</th>
+            <th>Pagamento</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <!-- Modal de Cadastro/Edição -->
+      <div id="modalCadastroCompra" class="modal hidden">
+        <div class="modal-content">
+          <span id="modalCloseCompra" class="modal-close">&times;</span>
+          <h3>Nova / Editar Compra</h3>
+          <form id="formCadastroCompra">
+            <input type="hidden" name="idCompra" />
+
+            <div class="form-group">
+              <label>Usuário
+                <input name="idUsuario" type="number" min="1" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Produto
+                <input name="idProduto" type="number" min="1" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Quantidade
+                <input name="quantidade" type="number" min="1" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Data da Compra
+                <input name="dataCompra" type="datetime-local" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Preço Unitário (R$)
+                <input name="precoUnitario" type="number" step="0.01" min="0" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Desconto Aplicado (%)
+                <input name="descontoAplicado" type="number" step="0.01" min="0" max="100" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Preço Final (R$)
+                <input name="precoFinal" type="number" step="0.01" min="0" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Forma de Pagamento
+                <input name="formaPagamento" type="text" required />
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Status da Compra
+                <input name="statusCompra" type="text" required />
+              </label>
+            </div>
+
+            <div id="formErrorCompra" class="form-error hidden"></div>
+            <button type="submit" class="btn-submit">Salvar</button>
+          </form>
+        </div>
+      </div>
     </section>
+
 
     <section id="relatorios" class="hidden">
       <h2>Relatórios Gerenciais</h2>

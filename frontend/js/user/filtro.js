@@ -35,15 +35,13 @@ function popularTabela(usuarios) {
   });
 }
 
-// Busca todos os usuários
 async function fetchAllUsuarios() {
   const res = await fetch(`${API}/usuarios`);
   if (!res.ok) throw new Error(`Erro ${res.status}`);
   return res.json();
 }
 
-// Handler do clique em "Buscar"
-export function filtroUsuarios() {
+export default function filtroUsuarios() {
   btnBuscar.addEventListener('click', async () => {
     const valor = inputBusca.value.trim();
     const metodo = metodoSelect.value;
@@ -80,8 +78,4 @@ export function filtroUsuarios() {
       tbody.innerHTML = '<tr><td colspan="11">Erro ao buscar usuários.</td></tr>';
     }
   });
-}
-
-export default function LigaFiltros() {
-  filtroUsuarios();
 }

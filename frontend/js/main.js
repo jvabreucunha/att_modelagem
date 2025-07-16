@@ -1,5 +1,4 @@
-import { LigaModais, carregarUsuarios, carregarProdutos } from './runner.js';
-import LigaFiltros from './user/filtro.js';
+import { LigaFiltros, LigaModais, carregarUsuarios, carregarProdutos, carregarCompras } from './runner.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   LigaModais();

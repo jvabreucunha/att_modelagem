@@ -1,87 +1,87 @@
 const API = 'http://localhost:3000';
 
 // Elementos DOM
-const metodoSelect = document.getElementById('metodoBusca');
-const inputBusca   = document.getElementById('inputBuscaUsuario');
-const btnBuscar    = document.getElementById('btnBuscarUsuario');
-const tbody        = document.querySelector('#tableUsuarios tbody');
+const metodoSelect   = document.getElementById('metodoBuscaProduto');
+const inputBusca     = document.getElementById('inputBuscaProduto');
+const btnBuscar      = document.getElementById('btnBuscarProduto');
+const tbody          = document.querySelector('#tableProdutos tbody');
 
-// Função para popular a tabela com um array de usuários
-function popularTabela(usuarios) {
+/**
+ * Popula a tabela de produtos com um array de produtos.
+ */
+function popularTabela(produtos) {
   tbody.innerHTML = '';
-  if (!usuarios || usuarios.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="11">Nenhum usuário encontrado.</td></tr>';
+  if (!produtos || produtos.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="9">Nenhum produto encontrado.</td></tr>';
     return;
   }
-  usuarios.forEach(u => {
-    const dataNascto = new Date(u.dataNascimento).toLocaleDateString('pt-BR');
+
+  produtos.forEach(p => {
+    const precoFmt = Number(p.preco)
+      .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const descontoFmt = `${Number(p.percentualDesconto).toFixed(2)}%`;
+
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td>${u.idUsuario}</td>
-      <td>${u.primeiroNome}</td>
-      <td>${u.sobrenome}</td>
-      <td>${u.idade}</td>
-      <td>${u.email}</td>
-      <td>${u.telefone}</td>
-      <td>${u.endereco}</td>
-      <td>${u.cidade}</td>
-      <td>${u.estado}</td>
-      <td>${dataNascto}</td>
+      <td>${p.idProduto}</td>
+      <td>${p.titulo}</td>
+      <td>${p.descricao}</td>
+      <td>${p.categoria}</td>
+      <td>${precoFmt}</td>
+      <td>${descontoFmt}</td>
+      <td>${p.estoque}</td>
+      <td>${p.marca || '-'}</td>
       <td>
-        <button class="edit" data-id="${u.idUsuario}">✏️</button>
-        <button class="del"  data-id="${u.idUsuario}">🗑️</button>
-      </td>`;
+        <button class="edit" data-id="${p.idProduto}">✏️</button>
+        <button class="del"  data-id="${p.idProduto}">🗑️</button>
+      </td>
+    `;
     tbody.appendChild(tr);
   });
 }
 
-// Busca todos os usuários
-async function fetchAllUsuarios() {
-  const res = await fetch(`${API}/usuarios`);
+async function fetchAllProdutos() {
+  const res = await fetch(`${API}/produtos`);
   if (!res.ok) throw new Error(`Erro ${res.status}`);
   return res.json();
 }
 
-// Handler do clique em "Buscar"
-export function filtroUsuarios() {
+export default function filtroProdutos() {
   btnBuscar.addEventListener('click', async () => {
     const valor = inputBusca.value.trim();
     const metodo = metodoSelect.value;
 
     try {
-      let usuarios = [];
+      let produtos = [];
 
       if (!valor) {
         // input vazio → mostra todos
-        usuarios = await fetchAllUsuarios();
-      } else if (metodo === 'id') {
+        produtos = await fetchAllProdutos();
+      } else if (metodo === 'idProduto') {
         // busca por ID exato
-        const res = await fetch(`${API}/usuarios/${encodeURIComponent(valor)}`);
+        const res = await fetch(`${API}/produtos/${encodeURIComponent(valor)}`);
         if (res.status === 404) {
-          usuarios = [];
+          produtos = [];
         } else if (!res.ok) {
           throw new Error(`Erro ${res.status}`);
         } else {
-          usuarios = [await res.json()];
+          produtos = [await res.json()];
         }
       } else {
-        // busca por nome (case‑insensitive, parcial)
-        const todos = await fetchAllUsuarios();
+        // busca por título (case‑insensitive, parcial)
+        const todos = await fetchAllProdutos();
         const busca = valor.toLowerCase();
-        usuarios = todos.filter(u =>
-          u.primeiroNome.toLowerCase().includes(busca) ||
-          u.sobrenome.toLowerCase().includes(busca)
+        produtos = todos.filter(p =>
+          p.titulo.toLowerCase().includes(busca)
         );
       }
 
-      popularTabela(usuarios);
+      popularTabela(produtos);
     } catch (err) {
-      console.error('Erro na busca:', err);
-      tbody.innerHTML = '<tr><td colspan="11">Erro ao buscar usuários.</td></tr>';
+      console.error('Erro na busca de produtos:', err);
+      tbody.innerHTML = '<tr><td colspan="9">Erro ao buscar produtos.</td></tr>';
     }
   });
 }
 
-export default function LigaFiltros() {
-  filtroUsuarios();
-}
+
